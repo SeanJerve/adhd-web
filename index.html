@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHDAssessor.co.uk - Your UK Guide to ADHD Assessment & Living Well</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Set up Tailwind configuration --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0284c7', // sky-600 for a slightly deeper, more confident blue
+                        'secondary': '#047857', // emerald-700 for a richer, stable green
+                        'highlight': '#d97706', // amber-700 for a warm, inviting accent
+                        'background': '#f8fafc', // light gray-50 for a clean, soft background
+                        'text-dark': '#1e293b', // slate-800 for main body text
+                        'text-light': '#475569', // slate-600 for secondary text
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Include Font Awesome for icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLQQgNPjI7L+W+Jb7T9jI7B8uUaUj80dG9c9/L9z5g9A/D4O8v3uK6T5f2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts: Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background-color: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background-color: #f1f5f9; }
+        /* Style for anchor links to prevent content jumping under fixed header */
+        section { scroll-margin-top: 5rem; }
+
+        /* General link styles */
+        a { @apply transition duration-200 ease-in-out; }
+
+        /* Specific card shadow for a clean look */
+        .smooth-shadow { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.02); }
+        .smooth-shadow:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04); }
+
+        /* Active nav link styles */
+        .nav-link.active {
+            @apply text-primary font-semibold;
+        }
+        .nav-link-mobile.active {
+            @apply bg-primary/10 text-primary font-semibold;
+        }
+    </style>
+</head>
+<body class="font-sans text-text-dark bg-background flex flex-col min-h-screen">
+
+    <!-- Header & Navigation --><header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo/Site Title --><a href="#home" data-page="home" class="nav-link text-2xl font-extrabold text-primary flex items-center">
+                    <i class="fas fa-brain mr-2 text-secondary"></i> ADHDAssessor<span class="text-text-light text-base font-normal">.co.uk</span>
+                </a>
+
+                <!-- Desktop Navigation --><nav class="hidden md:flex space-x-1 items-center text-sm font-medium">
+                    <a href="#assessment" data-page="assessment" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">Assessment</a>
+                    <a href="#treatment" data-page="treatment" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">Treatment</a>
+                    <a href="#living" data-page="living" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">Living with ADHD</a>
+                    <a href="#resources" data-page="resources" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">Resources</a>
+                    <a href="#blog" data-page="blog" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">Blog</a>
+                    <a href="#about" data-page="about" class="nav-link text-text-light hover:text-primary px-3 py-2 rounded-md">About</a>
+                    <a href="#contact" data-page="contact" class="nav-link px-4 py-2 bg-secondary text-white rounded-full hover:bg-emerald-800 transition smooth-shadow ml-4">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-text-light focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) --><nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-2">
+            <a href="#assessment" data-page="assessment" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'assessment')">ADHD Assessment</a>
+            <a href="#treatment" data-page="treatment" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'treatment')">Diagnosis & Treatment</a>
+            <a href="#living" data-page="living" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'living')">Living with ADHD</a>
+            <a href="#resources" data-page="resources" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'resources')">Resources</a>
+            <a href="#blog" data-page="blog" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'blog')">Blog / Insights</a>
+            <a href="#about" data-page="about" class="nav-link-mobile block py-2 px-4 text-sm text-text-dark hover:bg-gray-50" onclick="handleNavClick(event, 'about')">About / Disclaimer</a>
+            <a href="#contact" data-page="contact" class="nav-link-mobile block py-2 px-4 text-sm bg-secondary text-white m-2 rounded-lg text-center smooth-shadow hover:bg-emerald-800" onclick="handleNavClick(event, 'contact')">Contact Us</a>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        <!-- 1. Home Page --><section id="home" class="page-section py-16 md:py-24 bg-gradient-to-br from-white to-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Hero Text -->
+                    <div class="space-y-6">
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-text-dark tracking-tight">
+                            Understand Your Mind.
+                            <br>
+                            <span class="text-primary">Navigate Your ADHD.</span>
+                        </h1>
+                        <p class="text-lg text-text-light max-w-lg">
+                            Your guide to understanding ADHD assessment and living well with ADHD in the UK. We provide clear, balanced, and evidence-based information, from initial screening to daily strategies.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#assessment" data-page="assessment" class="nav-link px-6 py-3 bg-secondary text-white font-semibold rounded-lg smooth-shadow hover:bg-emerald-800 transition transform hover:-translate-y-1">
+                                Start Your Assessment Journey <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Image Placeholder --><div class="hidden lg:block">
+                        <img src="https://placehold.co/600x400/bde0fe/1e293b?text=Diverse+Individuals+Collaborating&font=inter" alt="Diverse group of individuals collaborating or discussing health, symbolizing support and understanding" class="rounded-xl smooth-shadow">
+                    </div>
+                </div>
+
+                <!-- Featured Articles / Email Signup --><div class="mt-20 pt-10 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <h3 class="text-2xl font-bold text-text-dark col-span-1 md:col-span-3 mb-4">Featured Insights</h3>
+
+                    <!-- Article Card 1 --><div class="bg-white rounded-xl p-6 border-l-4 border-primary smooth-shadow transition-all duration-300 hover:border-r-4 hover:-translate-y-1">
+                        <h4 class="text-lg font-bold text-text-dark mb-2">The New NHS Right to Choose Explained</h4>
+                        <p class="text-sm text-text-light mb-4">Understanding how you can access assessment via the NHS pathway...</p>
+                        <a href="#blog" data-page="blog" class="nav-link text-primary hover:text-sky-700 font-medium text-sm flex items-center">Read Article <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+                    </div>
+                    <!-- Article Card 2 --><div class="bg-white rounded-xl p-6 border-l-4 border-secondary smooth-shadow transition-all duration-300 hover:border-r-4 hover:-translate-y-1">
+                        <h4 class="text-lg font-bold text-text-dark mb-2">Managing Energy: ADHD & Burnout</h4>
+                        <p class="text-sm text-text-light mb-4">Practical tips for recognizing and recovering from executive function burnout...</p>
+                        <a href="#blog" data-page="blog" class="nav-link text-secondary hover:text-emerald-700 font-medium text-sm flex items-center">Read Article <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+                    </div>
+                    <!-- Email Signup --><div class="bg-primary/5 rounded-xl p-6 border-l-4 border-highlight smooth-shadow transition-all duration-300 hover:border-r-4 hover:-translate-y-1">
+                        <h4 class="text-lg font-bold text-text-dark mb-2">Stay Informed</h4>
+                        <p class="text-sm text-text-light mb-4">Sign up for our concise, monthly newsletter for the latest guidance.</p>
+                        <form class="flex">
+                            <input type="email" placeholder="your.email@example.com" class="text-sm w-full p-2 border border-gray-300 rounded-l-md focus:ring-primary focus:border-primary">
+                            <button type="submit" class="p-2 bg-primary text-white rounded-r-md hover:bg-sky-700"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ADHD Assessment --><section id="assessment" class="page-section hidden py-16 md:py-20 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    The ADHD Assessment Process
+                </h2>
+                <p class="text-lg text-center max-w-3xl mx-auto mb-12 text-text-light">
+                    Understanding the path to a formal diagnosis is the first crucial step. We break down both NHS and private routes.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-10">
+                    <!-- NHS Pathway Card --><div class="bg-white rounded-xl p-8 smooth-shadow border-l-4 border-primary space-y-4">
+                        <h3 class="text-2xl font-bold text-primary flex items-center"><i class="fas fa-hospital mr-3 text-2xl"></i> NHS Pathway</h3>
+                        <p class="text-text-light">The NHS route typically involves seeing your GP first for a referral to a local specialist mental health service (known as secondary care).</p>
+                        <ul class="space-y-2 list-none pl-0">
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Step 1:</strong> Initial GP consultation & screening.</li>
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Step 2:</strong> Referral to specialist team (long waiting times can occur).</li>
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Step 3:</strong> Full diagnostic assessment with a psychiatrist or specialist.</li>
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Key Concept:</strong> Right to Choose (if available in your region) allows referral to a specialist provider.</li>
+                        </ul>
+                    </div>
+                    <!-- Private Pathway Card --><div class="bg-white rounded-xl p-8 smooth-shadow border-l-4 border-highlight space-y-4">
+                        <h3 class="text-2xl font-bold text-highlight flex items-center"><i class="fas fa-user-tie mr-3 text-2xl"></i> Private Assessment</h3>
+                        <p class="text-text-light">Private care offers faster access to assessment but requires self-funding. Ensure the clinician is a UK-registered psychiatrist experienced in ADHD diagnosis.</p>
+                        <ul class="space-y-2 list-none pl-0">
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Cost:</strong> Varies widely, usually £1,000 - £2,500.</li>
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Process:</strong> Direct booking with a specialist (psychiatrist or neurodevelopmental specialist).</li>
+                            <li class="flex items-start text-sm text-text-dark"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> <strong>Post-Diagnosis:</strong> Crucial for setting up a Shared Care Agreement with your NHS GP for ongoing treatment.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-16 bg-white p-8 rounded-xl smooth-shadow border-t-4 border-gray-200">
+                    <h3 class="text-2xl font-bold text-text-dark mb-6 text-center">What to Expect at an Appointment</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                        <div>
+                            <p class="text-text-light mb-4">Assessments are often lengthy (1-3 hours) and involve gathering information about your current symptoms, developmental history (childhood), and how ADHD affects major life areas (work, relationships, etc.).</p>
+                            <p class="text-text-light">You may be asked to bring school reports or old documents for corroboration. The goal is to build a complete picture of your life, not just a snapshot of your current state.</p>
+                        </div>
+                        <div class="bg-background/50 p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-lg font-semibold text-text-dark mb-3">Key Topics & Materials</h4>
+                            <ul class="space-y-2 text-text-dark">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> Current symptoms & challenges.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> Childhood development & school experiences.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> Family history (if known).</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-2"></i> Impact on work, study, and relationships.</li>
+                                <li class="flex items-start"><i class="fas fa-file-alt text-primary mt-1 mr-2"></i> (Optional) Old school reports or performance reviews.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Diagnosis & Treatment --><section id="treatment" class="page-section hidden py-16 md:py-20 bg-gradient-to-br from-white to-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    Diagnosis & Treatment Options
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Medication Card -->
+                    <div class="bg-white rounded-xl p-8 smooth-shadow border-t-4 border-primary">
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center"><i class="fas fa-pills mr-2 text-2xl"></i> Medication Options</h3>
+                        <p class="text-text-light mb-4">Medication is a primary treatment. The two main types are stimulants (e.g., Methylphenidate, Lisdexamfetamine) and non-stimulants (e.g., Atomoxetine). This process, known as 'titration', is carefully managed by a specialist to find the right dose.</p>
+                        <h4 class="font-bold text-text-dark mb-2">Key Points:</h4>
+                        <ul class="list-disc list-inside text-text-light space-y-1 text-sm">
+                            <li>NICE guidelines recommend medication as a first-line treatment for adults.</li>
+                            <li>Stimulants are fast-acting; non-stimulants take several weeks.</li>
+                            <li>Regular monitoring (blood pressure, heart rate) is required.</li>
+                        </ul>
+                    </div>
+                    <!-- Non-Medication Card -->
+                    <div class="bg-white rounded-xl p-8 smooth-shadow border-t-4 border-secondary">
+                        <h3 class="text-2xl font-bold text-secondary mb-4 flex items-center"><i class="fas fa-hands-holding-child mr-2 text-2xl"></i> Non-Medication Treatment</h3>
+                        <p class="text-text-light mb-4">Therapy and coaching are highly effective, often used in combination with medication. These approaches focus on building skills and understanding the impact of ADHD on your life.</p>
+                        <h4 class="font-bold text-text-dark mb-2">Key Approaches:</h4>
+                        <ul class="list-disc list-inside text-text-light space-y-1 text-sm">
+                            <li><strong>CBT for ADHD:</strong> Adapts Cognitive Behavioural Therapy to target executive function challenges.</li>
+                            <li><strong>ADHD Coaching:</strong> Practical, goal-oriented support for daily organisation and productivity.</li>
+                            <li><strong>Psychoeducation:</strong> Learning about ADHD to "de-mystify" your symptoms and reduce shame.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Shared Care Agreement -->
+                <div class="mt-12 bg-highlight/10 p-8 rounded-xl border-l-4 border-highlight">
+                    <h3 class="text-2xl font-bold text-highlight mb-4">Understanding Shared Care Agreements (SCAs)</h3>
+                    <p class="text-text-dark">If you are diagnosed privately, an SCA is a vital document. It's an agreement between your private specialist and your NHS GP, allowing your GP to take over prescribing your medication on the NHS. This saves you significant ongoing costs. Gaining GP agreement *before* starting private treatment is highly recommended.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Living with ADHD --><section id="living" class="page-section hidden py-16 md:py-20 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    Living Well with ADHD
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1: Work --><div class="bg-white rounded-xl p-6 smooth-shadow border-t-4 border-primary">
+                        <i class="fas fa-briefcase text-5xl text-primary mb-4"></i>
+                        <h3 class="font-bold text-lg text-text-dark mb-2">Work & Productivity</h3>
+                        <p class="text-sm text-text-light">Strategies for managing deadlines, improving focus, and leveraging your strengths in the workplace. Covers the Access to Work scheme.</p>
+                    </div>
+                    <!-- Card 2: Relationships --><div class="bg-white rounded-xl p-6 smooth-shadow border-t-4 border-secondary">
+                        <i class="fas fa-heart text-5xl text-secondary mb-4"></i>
+                        <h3 class="font-bold text-lg text-text-dark mb-2">Relationships & Communication</h3>
+                        <p class="text-sm text-text-light">Advice on communication strategies, emotional regulation, and managing relationship dynamics with a non-ADHD partner or family.</p>
+                    </div>
+                    <!-- Card 3: Study --><div class="bg-white rounded-xl p-6 smooth-shadow border-t-4 border-highlight">
+                        <i class="fas fa-graduation-cap text-5xl text-highlight mb-4"></i>
+                        <h3 class="font-bold text-lg text-text-dark mb-2">Study & Education</h3>
+                        <p class="text-sm text-text-light">Navigating higher education, securing reasonable adjustments, and effective study techniques for the ADHD mind.</p>
+                    </div>
+                    <!-- Card 4: Mental Health --><div class="bg-white rounded-xl p-6 smooth-shadow border-t-4 border-text-light">
+                        <i class="fas fa-lightbulb text-5xl text-text-light mb-4"></i>
+                        <h3 class="font-bold text-lg text-text-dark mb-2">ADHD and Mental Health</h3>
+                        <p class="text-sm text-text-light">Addressing common co-occurring conditions like anxiety, depression, and managing feelings of shame or burnout.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Resources --><section id="resources" class="page-section hidden py-16 md:py-20 bg-gradient-to-br from-white to-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    Useful Resources
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Links --><div class="space-y-4 bg-white p-6 rounded-xl smooth-shadow border-l-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary border-b border-gray-200 pb-3 mb-4 flex items-center"><i class="fas fa-link mr-2 text-2xl"></i> Official Links & Charities</h3>
+                        <ul class="space-y-3 text-text-dark">
+                            <li><a href="#" class="font-medium hover:text-primary flex items-center"><i class="fas fa-arrow-right text-xs mr-2 text-primary"></i> NHS Website (General Health)</a></li>
+                            <li><a href="#" class="font-medium hover:text-primary flex items-center"><i class="fas fa-arrow-right text-xs mr-2 text-primary"></i> NICE Guidelines (ADHD in Adults/Children)</a></li>
+                            <li><a href="#" class="font-medium hover:text-primary flex items-center"><i class="fas fa-arrow-right text-xs mr-2 text-primary"></i> ADHD UK Charity</a></li>
+                            <li><a href="#" class="font-medium hover:text-primary flex items-center"><i class="fas fa-arrow-right text-xs mr-2 text-primary"></i> AADD-UK (Adults with ADHD)</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recommended Books --><div class="space-y-4 bg-white p-6 rounded-xl smooth-shadow border-l-4 border-secondary">
+                        <h3 class="text-xl font-bold text-secondary border-b border-gray-200 pb-3 mb-4 flex items-center"><i class="fas fa-book-open-reader mr-2 text-2xl"></i> Recommended Reads</h3>
+                        <ul class="space-y-3 text-text-dark">
+                            <li><span class="font-medium flex items-center"><i class="fas fa-book text-xs mr-2 text-secondary"></i> Driven to Distraction - Hallowell & Ratey</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fas fa-book text-xs mr-2 text-secondary"></i> The Body Keeps the Score - Bessel van der Kolk</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fas fa-book text-xs mr-2 text-secondary"></i> A Radical Guide for Women with ADHD - Sari Solden</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fas fa-book text-xs mr-2 text-secondary"></i> Taking Charge of Adult ADHD - Russell Barkley</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Apps & Support --><div class="space-y-4 bg-white p-6 rounded-xl smooth-shadow border-l-4 border-highlight">
+                        <h3 class="text-xl font-bold text-highlight border-b border-gray-200 pb-3 mb-4 flex items-center"><i class="fas fa-mobile-screen mr-2 text-2xl"></i> Apps & Support Groups</h3>
+                        <ul class="space-y-3 text-text-dark">
+                            <li><span class="font-medium flex items-center"><i class="fas fa-laptop-code text-xs mr-2 text-highlight"></i> Headspace / Calm (Mindfulness)</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fas fa-laptop-code text-xs mr-2 text-highlight"></i> Todoist / Trello (Productivity)</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fas fa-users text-xs mr-2 text-highlight"></i> Local peer support groups</span></li>
+                            <li><span class="font-medium flex items-center"><i class="fab fa-reddit-alien text-xs mr-2 text-highlight"></i> ADHD Reddit communities (r/ADHD)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Blog / Insights --><section id="blog" class="page-section hidden py-16 md:py-20 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    Blog & Insights
+                </h2>
+                <!-- Search and Filter Controls -->
+                <div class="mb-10 bg-white p-6 rounded-xl smooth-shadow sticky top-[81px] z-40 border-t border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                        <div class="md:col-span-1">
+                            <label for="search-input" class="block text-sm font-medium text-text-dark mb-1">Search Articles</label>
+                            <div class="relative">
+                                <input type="text" id="search-input" placeholder="e.g. 'burnout', 'medication'..." class="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                                <i class="fas fa-search text-text-light absolute left-3 top-1/2 -translate-y-1/2"></i>
+                            </div>
+                        </div>
+                        <div class="md:col-span-1">
+                            <label for="category-filter" class="block text-sm font-medium text-text-dark mb-1">Filter by Category</label>
+                            <select id="category-filter" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                                <option value="">All Categories</option>
+                                <option value="Assessment">Assessment</option>
+                                <option value="Medication">Medication</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-1 text-right pt-6">
+                            <button id="reset-button" class="px-4 py-2 text-sm text-text-light hover:text-primary">Reset Filters</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post Grid -->
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Blog posts will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. About / Disclaimer --><section id="about" class="page-section hidden py-16 md:py-20 bg-gradient-to-br from-white to-background border-t border-gray-200">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- About Us -->
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-primary mb-4 flex items-center"><i class="fas fa-users-gear mr-2"></i> About ADHD Assessor</h2>
+                        <p class="text-lg text-text-dark leading-relaxed">
+                            <strong>ADHD Assessor is an independent educational platform created by UK healthcare professionals</strong> to improve understanding of ADHD and the complex assessment process. Our goal is to empower individuals and families with accurate, digestible information to navigate their journey. We champion evidence-based care and informed decision-making.
+                        </p>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="bg-highlight/10 p-6 rounded-xl border-l-4 border-highlight">
+                        <h3 class="text-2xl font-bold text-highlight mb-4 flex items-center"><i class="fas fa-triangle-exclamation mr-2"></i> Important Disclaimer</h3>
+                        <p class="text-md text-text-dark leading-relaxed">
+                            <strong>This site provides general information and does not replace professional medical advice.</strong> Always consult a qualified professional (your GP or a psychiatrist) about your personal situation, diagnosis, and treatment plan. We are not a medical clinic and cannot provide individual clinical advice.
+                        </smap>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Contact Page --><section id="contact" class="page-section hidden py-16 md:py-20 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-text-dark mb-10 text-center">
+                    Get In Touch
+                </h2>
+                <div class="max-w-lg mx-auto bg-white p-8 rounded-xl smooth-shadow border-t-4 border-secondary">
+                    <p class="mb-6 text-text-light text-center">Have a question about the site or a suggestion for an article? Use the form below.</p>
+                    <form onsubmit="handleContactSubmit(event)">
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-text-dark mb-1">Your Name</label>
+                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary transition">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-text-dark mb-1">Your Email</label>
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary transition">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-text-dark mb-1">Message / Query</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-secondary text-white font-semibold rounded-lg hover:bg-emerald-800 transition smooth-shadow">Send Message</button>
+                    </form>
+                    <p id="contact-message" class="mt-4 text-center text-sm font-medium hidden"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-text-dark text-white py-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h5 class="font-bold text-primary mb-3">Sections</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#assessment" data-page="assessment" class="footer-link hover:text-primary">Assessment Guide</a></li>
+                        <li><a href="#treatment" data-page="treatment" class="footer-link hover:text-primary">Treatment</a></li>
+                        <li><a href="#living" data-page="living" class="footer-link hover:text-primary">Living with ADHD</a></li>
+                        <li><a href="#resources" data-page="resources" class="footer-link hover:text-primary">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-primary mb-3">Legal & Info</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#about" data-page="about" class="footer-link hover:text-primary">About Us</a></li>
+                        <li><a href="#about" data-page="about" class="footer-link hover:text-primary">Disclaimer</a></li>
+                        <li><a href="#contact" data-page="contact" class="footer-link hover:text-primary">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-2">
+                    <h5 class="font-bold text-primary mb-3">About This Site</h5>
+                    <p class="text-gray-400">ADHDAssessor.co.uk is an independent educational platform. All information is for general guidance and does not constitute medical advice. Please consult a qualified professional for your specific needs.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; <span id="year">2024</span> ADHDAssessor.co.uk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA & CORE FUNCTIONALITY ---
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const blogPosts = [
+            { id: 1, title: "The Key Differences Between NHS and Private ADHD Assessment", date: "25 May 2025", category: "Assessment", summary: "A clear breakdown of the pros, cons, and essential steps for both the publicly and privately funded assessment pathways in the UK." },
+            { id: 2, title: "Managing Medication: A Guide to Titration", date: "18 May 2025", category: "Medication", summary: "What 'titration' actually means, what to expect, and how to track your symptoms effectively during the process." },
+            { id: 3, title: "ADHD, Anxiety, or Both? Understanding the Overlap", date: "12 May 2025", category: "Lifestyle", summary: "It's common to have both, but how do you tell the symptoms apart? We explore the complex relationship." },
+            { id: 4, title: "Productivity Tips for the ADHD Brain: Beyond the To-Do List", date: "05 May 2025", category: "Lifestyle", summary: "Why typical productivity hacks fail and what to try instead, from body-doubling to 'chunking' your time." },
+            { id: 5, title: "What is a Shared Care Agreement and Why Do I Need One?", date: "28 Apr 2025", category: "Medication", summary: "Explaining the vital link between your private specialist and your NHS GP for ongoing medication prescriptions." },
+            { id: 6, title: "The NICE Guidelines Summarised for the Public", date: "20 Jan 2025", category: "Assessment", summary: "What the National Institute for Health and Care Excellence says about who should be assessed and how." },
+        ];
+
+        function renderBlogPosts(posts) {
+            const grid = document.getElementById('blog-grid');
+            grid.innerHTML = ''; // Clear existing posts
+
+            if (posts.length === 0) {
+                grid.innerHTML = `<p class="text-text-light col-span-1 md:col-span-3 text-center">No articles found matching your criteria. Try adjusting your search.</p>`;
+            }
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'bg-white rounded-xl p-6 smooth-shadow border-t-4 border-highlight transition-transform duration-300 hover:-translate-y-1';
+                postElement.innerHTML = `
+                    <p class="text-xs font-semibold uppercase text-primary mb-1">${post.category}</p>
+                    <h3 class="text-xl font-bold text-text-dark mb-2">${post.title}</h3>
+                    <p class="text-sm text-text-light mb-4">${post.summary}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-text-light">${post.date}</span>
+                        <a href="#" class="text-secondary hover:text-emerald-700 font-medium text-sm flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(postElement);
+            });
+        }
+
+        function filterAndSearchPosts() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+
+            const filteredPosts = blogPosts.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchInput) || post.summary.toLowerCase().includes(searchInput);
+                const matchesCategory = !category || post.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderBlogPosts(filteredPosts);
+        }
+
+        // --- NEW PAGE ROUTING LOGIC ---
+
+        function showPage(pageId) {
+            if (!pageId) pageId = 'home';
+
+            // Hide all page sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the active page section
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            } else {
+                // Fallback to home if page not found
+                document.getElementById('home').classList.remove('hidden');
+                pageId = 'home';
+            }
+
+            // Update URL hash
+            window.location.hash = pageId;
+
+            // Update active state on desktop nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'text-primary', 'font-semibold');
+                link.classList.add('text-text-light'); // Reset all to default
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active', 'text-primary', 'font-semibold');
+                    link.classList.remove('text-text-light');
+                }
+            });
+            // Special case for contact button
+            const contactButton = document.querySelector('a.nav-link[data-page="contact"]');
+            if (contactButton && contactButton.dataset.page === pageId) {
+                contactButton.classList.remove('text-text-light'); // It's a button, doesn't need text color reset
+            }
+
+
+            // Update active state on mobile nav links
+            document.querySelectorAll('.nav-link-mobile').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+
+        // --- EVENT LISTENERS ---
+
+        // 1. Initialize Blog and Page on load
+        window.onload = () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            renderBlogPosts(blogPosts);
+
+            // Handle initial page load from hash
+            let initialPage = window.location.hash.substring(1) || 'home';
+            showPage(initialPage);
+
+            // Add listeners to all nav links (desktop, mobile, footer, logo)
+            document.querySelectorAll('.nav-link, .nav-link-mobile, .footer-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = e.currentTarget.dataset.page;
+                    handleNavClick(e, pageId);
+                });
+            });
+            
+            // Mobile menu button
+            document.getElementById('mobile-menu-button').addEventListener('click', toggleMenu);
+
+            // Blog filters
+            document.getElementById('search-input').addEventListener('input', filterAndSearchPosts);
+            document.getElementById('category-filter').addEventListener('change', filterAndSearchPosts);
+            document.getElementById('reset-button').addEventListener('click', () => {
+                document.getElementById('search-input').value = '';
+                document.getElementById('category-filter').value = '';
+                filterAndSearchPosts();
+            });
+
+            // Google Analytics / Search Console Placeholder
+            /*
+            <!-- Add your Google Analytics script here -->
+            <!-- Add your Google Search Console verification tag in the <head> -->
+            */
+        };
+
+        // 2. Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 3. Handle Nav Clicks (for both desktop and mobile)
+        function handleNavClick(event, pageId) {
+            event.preventDefault();
+            if (pageId) {
+                showPage(pageId);
+            }
+            // Close mobile menu if it's open
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // 4. Contact Form Submission Handler (Non-functional mock)
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const messageBox = document.getElementById('contact-message');
+            messageBox.classList.remove('hidden', 'text-red-600');
+            messageBox.classList.add('text-secondary');
+            messageBox.innerHTML = 'Thank you! Your message has been received (Mock submission). We aim to respond within 48 hours.';
+            // In a real app, you would fetch() the form data to a server endpoint here
+            
+            // Clear form (optional)
+            // event.target.reset();
+        }
+    </script>
+</body>
+</html>
